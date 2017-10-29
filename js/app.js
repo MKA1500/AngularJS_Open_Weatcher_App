@@ -19,14 +19,17 @@ myApp.controller('myController', ['$scope', '$http', function ($scope, $http) {
 
         // http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=9a899e98ac276d14ee3ba6cd2a21598d
 
+        // https://openweathermap.org/weather-conditions
+
         $http.get(openWeatherURL).success(function(data){
-            $scope.main = data.weather[0].description;
             $scope.description = data.weather[0].description;
             $scope.speed = data.wind.speed;
             // m per s
             $scope.temp = data.main.temp;
             $scope.pressure = data.main.pressure;
             $scope.humidity = data.main.humidity;
+            $scope.icon = data.weather[0].icon;
+            $scope.icon = "http://openweathermap.org/img/w/" + $scope.icon + ".png";
         });
     });
 }]);

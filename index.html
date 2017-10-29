@@ -21,13 +21,31 @@
 
 <body ng-app="myApp">
 <div ng-controller="myController">
-    City: {{position.city}}<br>
-    Main: {{main}}<br>
-    Desc: {{description}}<br>
-    Wind speed: {{speed}} m/s<br>
-    Temp: {{temp}} &ordm; C<br>
-    Pressure: {{pressure}} hPa <br>
-    Humidity: {{humidity}}<br>
+    <header>
+        <p>{{labels.title}}</p>
+    </header>
+    <main class="container">
+        <div class="description">
+            <h1>{{position.city}}</h1>
+            <img src="{{icon}}"/>
+            <h2>{{description}}</h2>
+            <p>Wind speed: {{speed}} m/s</p>
+            <p>Temperature {{temp}} &ordm; C</p>
+            <p>Air pressure: {{pressure}} hPa</p>
+            <p>Humidity: {{humidity}} %</p>
+        </div>
+        <div class="find-weather">
+            <form name="form" ng-submit="findWeather()" class="new-weather" novalidate>
+
+                <div class="submit-area">
+                    <input type="submit" class="submit btn btn-primary" value="Find Your Weather">
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
 </div>
 </body>
 </html>
