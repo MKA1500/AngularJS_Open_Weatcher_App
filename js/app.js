@@ -26,7 +26,7 @@ myApp.controller('myController', ['$scope', '$http', function ($scope, $http) {
             $scope.humidity = data.main.humidity;
             $scope.icon = data.weather[0].icon;
             $scope.icon = "http://openweathermap.org/img/w/" + $scope.icon + ".png";
-        }).error('error');
+        });
     });
 
     
