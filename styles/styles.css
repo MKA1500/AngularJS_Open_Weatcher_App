@@ -5,6 +5,7 @@
 body {
     margin: 0;
     padding: 0;
+    color: #333;
 }
 
 header {
@@ -29,7 +30,7 @@ header p {
 .container {
     height: auto;
     min-height: 70vh;
-    width: 300px;
+    width: 80%;
     margin: 0 auto;
 }
 
@@ -57,6 +58,28 @@ header p {
 .btn-primary:focus {
     background-color: #0065A1;
     border-color: #0065A1;
+}
+
+.form-control-container {
+    width: 100%;
+    height: auto;
+}
+
+input {
+    width: 100%;
+    margin-bottom: 15px;
+    height: 38px;
+    border-radius: .25rem;
+    border: 1px solid #ddd;
+    padding-left: 5px;
+}
+
+select {
+    width: 100%;
+    margin-bottom: 15px;
+    height: 38px;
+    border-radius: .25rem;
+    border: 1px solid #ddd;
 }
 
 .submit-area {

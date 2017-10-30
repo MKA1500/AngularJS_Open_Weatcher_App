@@ -2,7 +2,7 @@ var myApp = angular.module('myApp', []);
 
 myApp.controller('myController', ['$scope', '$http', function ($scope, $http) {
     $scope.labels = {
-        title: "Open Weather Map API"
+        title: "Open Weather API"
     };
 
     $scope.myApiKey = "b43cf762e537bdce9ce724f6f27bb497";

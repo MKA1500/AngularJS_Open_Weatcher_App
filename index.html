@@ -36,7 +36,24 @@
         </div>
         <div class="find-weather">
             <form name="form" ng-submit="findWeather()" class="new-weather" novalidate>
+                <div class="form-control-container">
+                    <input type="text" name="city" placeholder="City" ng-model="new.city" required/>
+                    <span class="error-message"
+                          ng-show="(form.$submitted && form.firstname.$error.required) || (form.firstname.$dirty && form.firstname.$error.required)">First name is required</span>
+                    <span class="validCheck" ng-show="form.firstname.$valid"></span>
 
+                    <select name="country" ng-model="new.country" ng-init="new.country='de'">
+                        <option value="at">Austria: AT</option>
+                        <option value="be">Belgium: BE</option>
+                        <option value="cz">Czech Republic: CZ</option>
+                        <option value="fr">France: FR</option>
+                        <option value="de">Germany: DE</option>
+                        <option value="pl">Poland: PL</option>
+                        <option value="ae">United Arab Emirates: AE</option>
+                        <option value="gb">United Kingdom: GB</option>
+                        <option value="us">United States: US</option>
+                    </select>
+                </div>
                 <div class="submit-area">
                     <input type="submit" class="submit btn btn-primary" value="Find Your Weather">
                 </div>
