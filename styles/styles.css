@@ -48,9 +48,15 @@ header p {
     padding-top: 20px;
 }
 
+.find-weather h5 {
+    width: 100%;
+    text-align: center;
+}
+
 .btn-primary {
     background-color: #0073b1;
     border-color: #0073b1;
+    cursor: pointer;
 }
 
 .btn-primary:hover,
@@ -63,11 +69,21 @@ header p {
 .form-control-container {
     width: 100%;
     height: auto;
+    position: relative;
+}
+
+.error-message {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    color: #d90000;
+    font-size: 11px;
+    font-weight: bold;
 }
 
 input {
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     height: 38px;
     border-radius: .25rem;
     border: 1px solid #ddd;
@@ -76,7 +92,7 @@ input {
 
 select {
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     height: 38px;
     border-radius: .25rem;
     border: 1px solid #ddd;
