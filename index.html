@@ -27,12 +27,12 @@
     <main class="container">
         <div class="description">
             <h1>{{position.city}}</h1>
-            <img src="{{icon}}"/>
-            <p class="temperature">{{temp}} &ordm; C</p>
-            <h2>{{description}}</h2>
-            <p>Wind speed: {{speed}} m/s</p>
-            <p>Air pressure: {{pressure}} hPa</p>
-            <p>Humidity: {{humidity}} %</p>
+            <img src="http://openweathermap.org/img/w/{{yourWeather.weather[0].icon}}.png"/>
+            <p class="temperature">{{yourWeather.main.temp}} &ordm; C</p>
+            <h2>{{yourWeather.weather[0].description}}</h2>
+            <p>Wind speed: {{yourWeather.wind.speed}} m/s</p>
+            <p>Air pressure: {{yourWeather.main.pressure}} hPa</p>
+            <p>Humidity: {{yourWeather.main.humidity}} %</p>
         </div>
         <div class="find-weather">
             <form name="form" ng-submit="findWeather()" class="new-weather" novalidate>

@@ -34,10 +34,12 @@ myApp.controller('myController', ['$scope', 'getWeather', function ($scope, getW
             $scope.theLocalWeatherURL = getWeather.getLocalWeatherUrl($scope.position.lon, $scope.position.lon, getWeather.myApiKey);
             getWeather.getInitialData($scope.theLocalWeatherURL, function (data) {
                 $scope.yourWeather = data;
+
                 console.log($scope.theLocalWeatherURL);
                 console.log($scope.yourWeather);
             });
         });
+
     }
 
     $scope.getLocalWeather();
@@ -46,30 +48,8 @@ myApp.controller('myController', ['$scope', 'getWeather', function ($scope, getW
         title: "Open Weather API"
     };
     /*
-     $http.get("http://ip-api.com/json").success(function(data){
-     $scope.position = data;
-
-     $scope.openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?lat=" +
-     $scope.position.lat + "&lon=" + $scope.position.lon + "&units=metric&appid=" + $scope.myApiKey;
-
      // https://openweathermap.org/current#current_JSON
-
      // https://openweathermap.org/weather-conditions
-
-     $http.get($scope.openWeatherURL).success(function(data){
-     $scope.description = "some testing desc"
-     // data.weather[0].description;
-     $scope.speed = data.wind.speed;
-     // m per s
-     $scope.temp = data.main.temp;
-     $scope.pressure = data.main.pressure;
-     $scope.humidity = data.main.humidity;
-     $scope.icon = data.weather[0].icon;
-     $scope.icon = "http://openweathermap.org/img/w/" + $scope.icon + ".png";
-     });
-     });
-
-
 
      $scope.findWeather = function (form) {
      if($scope.form.$valid) {
@@ -78,8 +58,6 @@ myApp.controller('myController', ['$scope', 'getWeather', function ($scope, getW
 
      $scope.openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" +
      $scope.position.city + "," + $scope.position.country + "&units=metric&appid=" + $scope.myApiKey;
-
-     console.log($scope.openWeatherURL);
 
      $http.get($scope.openWeatherURL).success(function(data){
      $scope.description = data.weather[0].description;
