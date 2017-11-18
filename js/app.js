@@ -3,24 +3,29 @@ var myApp = angular.module('myApp', []);
 myApp.factory('getWeather', ['$http', '$log', function ($http, $log) {
     $log.log("instantiating factory getWeather");
     var getWeatherUrl = {
-        getInitialData: function (siteUrl, callback) {
+        getData: function (siteUrl, callback) {
             $http({
                 url: siteUrl,
                 method: 'GET'
             }).then(function (resp) {
                 callback(resp.data);
             }, function (resp) {
-                $log.log('something went wrong...')
+                alert('Wrong city or country code. Please try again');
             });
         },
         myApiKey: "b43cf762e537bdce9ce724f6f27bb497",
         ipApi: "http://ip-api.com/json",
-        getLocalWeatherUrl: function (a, b, c) {
+        getLocalWeatherUrl: function (a, b, apiKey) {
             var localUrl = "http://api.openweathermap.org/data/2.5/weather?lat=" + a +
                 "&lon=" + b +
-                "&units=metric&appid=" + c;
-
+                "&units=metric&appid=" + apiKey;
             return localUrl;
+        },
+        getWeatherByCityUrl: function (city, country, apiKey) {
+            var customUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city +
+                "," + country +
+                "&units=metric&appid=" + apiKey;
+            return customUrl;
         }
     };
 
@@ -28,50 +33,35 @@ myApp.factory('getWeather', ['$http', '$log', function ($http, $log) {
 }]);
 
 myApp.controller('myController', ['$scope', 'getWeather', function ($scope, getWeather) {
-    $scope.getLocalWeather = function () {
-        getWeather.getInitialData(getWeather.ipApi, function (data) {
-            $scope.position = data;
-            $scope.theLocalWeatherURL = getWeather.getLocalWeatherUrl($scope.position.lon, $scope.position.lon, getWeather.myApiKey);
-            getWeather.getInitialData($scope.theLocalWeatherURL, function (data) {
-                $scope.yourWeather = data;
+    $scope.labels = {
+        title: "Open Weather API"
+    };
 
-                console.log($scope.theLocalWeatherURL);
-                console.log($scope.yourWeather);
+    $scope.getLocalWeather = function () {
+        getWeather.getData(getWeather.ipApi, function (data) {
+            $scope.position = data;
+            $scope.theLocalWeatherURL = getWeather.getLocalWeatherUrl($scope.position.lat, $scope.position.lon, getWeather.myApiKey);
+            getWeather.getData($scope.theLocalWeatherURL, function (data) {
+                $scope.yourWeather = data;
             });
         });
+    }
 
+    $scope.getWeatherByCity = function (form) {
+        if($scope.form.$valid) {
+            $scope.position.city = $scope.new.city;
+            $scope.position.country = $scope.new.country;
+            $scope.theCityWeatherURL = getWeather.getWeatherByCityUrl($scope.position.city, $scope.position.country, getWeather.myApiKey);
+            getWeather.getData($scope.theCityWeatherURL, function (data) {
+                $scope.yourWeather = data;
+            });
+        }
     }
 
     $scope.getLocalWeather();
 
-    $scope.labels = {
-        title: "Open Weather API"
-    };
-    /*
      // https://openweathermap.org/current#current_JSON
      // https://openweathermap.org/weather-conditions
-
-     $scope.findWeather = function (form) {
-     if($scope.form.$valid) {
-     $scope.position.city = $scope.new.city;
-     $scope.position.country = $scope.new.country;
-
-     $scope.openWeatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" +
-     $scope.position.city + "," + $scope.position.country + "&units=metric&appid=" + $scope.myApiKey;
-
-     $http.get($scope.openWeatherURL).success(function(data){
-     $scope.description = data.weather[0].description;
-     $scope.speed = data.wind.speed;
-     // m per s
-     $scope.temp = data.main.temp;
-     $scope.pressure = data.main.pressure;
-     $scope.humidity = data.main.humidity;
-     $scope.icon = data.weather[0].icon;
-     $scope.icon = "http://openweathermap.org/img/w/" + $scope.icon + ".png";
-     });
-     }
-     }
-     */
 }]);
 
 // http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=9a899e98ac276d14ee3ba6cd2a21598d

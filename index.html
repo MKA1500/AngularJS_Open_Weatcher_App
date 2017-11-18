@@ -35,16 +35,18 @@
             <p>Humidity: {{yourWeather.main.humidity}} %</p>
         </div>
         <div class="find-weather">
-            <form name="form" ng-submit="findWeather()" class="new-weather" novalidate>
+            <form name="form" ng-submit="getWeatherByCity()" class="new-weather" novalidate>
                 <h5>Find more weather:</h5>
                 <div class="form-control-container">
                     <input type="text" name="city" placeholder="City" ng-model="new.city" required/>
                     <span class="error-message"
                           ng-show="(form.$submitted && form.city.$error.required) || (form.city.$dirty && form.city.$error.required)">City name is required</span>
 
-                    <select name="country" ng-model="new.country" ng-init="new.country='de'">
+                    <select name="country" ng-model="new.country" ng-init="new.country='pl'">
                         <option value="at">Austria: AT</option>
                         <option value="be">Belgium: BE</option>
+                        <option value="br">Brazil: BR</option>
+                        <option value="ca">Canada: CA</option>
                         <option value="cn">China: CN</option>
                         <option value="cz">Czech Republic: CZ</option>
                         <option value="fr">France: FR</option>
@@ -52,7 +54,10 @@
                         <option value="in">India: IN</option>
                         <option value="it">Italy: IT</option>
                         <option value="pl">Poland: PL</option>
+                        <option value="pt">Portugal: PT</option>
+                        <option value="ek">Slovakia: SK</option>
                         <option value="es">Spain: ES</option>
+                        <option value="se">Sweden: SE</option>
                         <option value="ae">United Arab Emirates: AE</option>
                         <option value="gb">United Kingdom: GB</option>
                         <option value="us">United States: US</option>
