@@ -13,8 +13,8 @@ gulp.task('webserver', function() {
         .pipe(webserver({
             fallback: 'index.html',
             livereload: true,
-            directoryListing: false,
-            open: true
+            open: true,
+            directoryListing: false
         }));
 });
 
@@ -32,7 +32,7 @@ gulp.task('minify-css', function() {
 });
 
 gulp.task('watch_scss', function () {
-    gulp.watch(SCSS_SRC, ['sass', 'minify-css']);
+    gulp.watch(SCSS_SRC, ['sass']);
 });
 
 gulp.task('default', ['webserver', 'watch_scss']);
