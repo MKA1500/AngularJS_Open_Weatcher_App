@@ -1,0 +1,27 @@
+{
+  "name": "angularjs_open_weatcher_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MKA1500/AngularJS_Open_Weatcher_App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MKA1500/AngularJS_Open_Weatcher_App/issues"
+  },
+  "homepage": "https://github.com/MKA1500/AngularJS_Open_Weatcher_App#readme",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "gulp-clean-css": "^3.9.3",
+    "gulp-sass": "^4.0.1",
+    "gulp-webserver": "^0.9.1"
+  }
+}
