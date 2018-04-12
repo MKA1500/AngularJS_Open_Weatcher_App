@@ -2,46 +2,40 @@ body {
     margin: 0;
     padding: 0;
     color: #333;
-}
-
-header {
-    height: 15vh;
-    width: 100%;
-    background-color: #eee;
-    position: relative;
-}
-
-header p {
-    font-size: 20px;
-    font-weight: bold;
-    color: #FFF;
-    width: 100%;
-    text-align: center;
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    margin: 0;
-}
-
-.container {
-    height: auto;
-    min-height: 70vh;
-    width: 80%;
-    margin: 0 auto;
-}
-
-.container .description {
-    text-align: center;
-    padding-top: 20px;
-}
-
-.container .description img {
-   width: 60px
-}
-
-.container .description p {
-    font-size: 14px;
-    margin-bottom: 3px;
+    header {
+        height: 15vh;
+        width: 100%;
+        background-color: #333;
+        position: relative;
+        p {
+            font-size: 20px;
+            font-weight: bold;
+            color: #FFF;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            margin: 0;
+        }
+    }
+    .container {
+        height: auto;
+        min-height: 70vh;
+        width: 80%;
+        margin: 0 auto;
+        .description {
+            text-align: center;
+            padding-top: 20px;
+            img {
+               width: 60px
+            }
+            p {
+                font-size: 14px;
+                margin-bottom: 3px;
+            }
+        }
+    }
 }
 
 .container .description p.temperature {
@@ -95,12 +89,10 @@ input {
     border-radius: .25rem;
     border: 1px solid #ddd;
     padding-left: 5px;
+    &[type="submit"] {
+        width: auto;
+    }
 }
-
-input[type="submit"] {
-    width: auto;
-}
-
 select {
     width: 100%;
     margin-bottom: 25px;
@@ -108,7 +100,6 @@ select {
     border-radius: .25rem;
     border: 1px solid #ddd;
 }
-
 .submit-area {
     width: 100%;
     height: auto;

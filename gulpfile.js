@@ -1,38 +1,31 @@
-'use strict';
+var gulp = require('gulp'),
+    sass = require('gulp-sass'),
+    sourcemaps = require('gulp-sourcemaps'),
+    postcss = require('gulp-postcss'),
+    autoprefixer = require('autoprefixer'),
+    cleanCSS = require('gulp-clean-css'),
+    scss = 'styles/';
 
-var gulp = require('gulp');
-var webserver = require('gulp-webserver');
-var sass = require('gulp-sass');
-var cleanCSS = require('gulp-clean-css');
-
-var SCSS_SRC = './styles/scss**/*.scss';
-var DEST = './styles';
-
-gulp.task('webserver', function() {
-    gulp.src('./')
-        .pipe(webserver({
-            fallback: 'index.html',
-            livereload: true,
-            open: true,
-            directoryListing: false
-        }));
+gulp.task('css', function() {
+	return gulp.src(scss + 'style.scss')
+	.pipe(sourcemaps.init())
+	.pipe(sass({
+		outputStyle: 'expanded',
+		indentType: 'tab',
+		indentWidth: '1'
+	}).on('error', sass.logError))
+	.pipe(postcss([
+		autoprefixer('last 2 versions', '> 1%')
+	]))
+	.pipe(cleanCSS({compatibility: 'ie8'}))
+	.pipe(sourcemaps.write(scss + 'maps'))
+	.pipe(gulp.dest('css'));
 });
 
-gulp.task('sass', function () {
-    return gulp.src(SCSS_SRC)
-        .pipe(sass().on('error', sass.logError))
-        .pipe(cleanCSS({compatibility: 'ie8'}))
-        .pipe(gulp.dest(DEST));
+gulp.task('watch', function() {
+    gulp.watch([scss + '**/*.css', scss + '**/*.scss' ], ['css']);
 });
 
-gulp.task('minify-css', function() {
-    return gulp.src('styles/*.css')
-        .pipe(cleanCSS({compatibility: 'ie8'}))
-        .pipe(gulp.dest('dist'));
+gulp.task('default', ['css', 'watch'], function () {
+   gulp.watch(scss + 'style.scss', ['watch']);
 });
-
-gulp.task('watch_scss', function () {
-    gulp.watch(SCSS_SRC, ['sass']);
-});
-
-gulp.task('default', ['webserver', 'watch_scss']);
