@@ -1,31 +1,45 @@
+'use strict';
+
 var gulp = require('gulp'),
+    connect = require('gulp-connect'),
     sass = require('gulp-sass'),
-    sourcemaps = require('gulp-sourcemaps'),
-    postcss = require('gulp-postcss'),
-    autoprefixer = require('autoprefixer'),
-    cleanCSS = require('gulp-clean-css'),
-    scss = 'styles/';
+    cleanCSS = require('gulp-clean-css');
 
-gulp.task('css', function() {
-	return gulp.src(scss + 'style.scss')
-	.pipe(sourcemaps.init())
-	.pipe(sass({
-		outputStyle: 'expanded',
-		indentType: 'tab',
-		indentWidth: '1'
-	}).on('error', sass.logError))
-	.pipe(postcss([
-		autoprefixer('last 2 versions', '> 1%')
-	]))
-	.pipe(cleanCSS({compatibility: 'ie8'}))
-	.pipe(sourcemaps.write(scss + 'maps'))
-	.pipe(gulp.dest('css'));
+var SCSS_SRC = './styles/scss**/*.scss';
+var DEST = './styles';
+
+gulp.task('connect', function() {
+  connect.server({
+    root: 'app',
+    livereload: true
+  });
 });
 
-gulp.task('watch', function() {
-    gulp.watch([scss + '**/*.css', scss + '**/*.scss' ], ['css']);
+gulp.task('html', function () {
+  gulp.src('./*.html')
+    .pipe(gulp.dest('./app'))
+    .pipe(connect.reload());
 });
 
-gulp.task('default', ['css', 'watch'], function () {
-   gulp.watch(scss + 'style.scss', ['watch']);
+gulp.task('watch', function () {
+  gulp.watch(['./*.html'], ['html']);
 });
+
+gulp.task('sass', function () {
+    return gulp.src(SCSS_SRC)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(cleanCSS({compatibility: 'ie8'}))
+        .pipe(gulp.dest(DEST));
+});
+
+gulp.task('minify-css', function() {
+    return gulp.src('styles/*.css')
+        .pipe(cleanCSS({compatibility: 'ie8'}))
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('watch_scss', function () {
+    gulp.watch(SCSS_SRC, ['sass', 'minify-css']);
+});
+
+gulp.task('default', ['connect', 'watch', 'watch_scss']);
